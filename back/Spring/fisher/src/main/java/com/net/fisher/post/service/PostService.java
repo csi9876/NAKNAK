@@ -38,7 +38,6 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class PostService {
     private final MemberRepository memberRepository;
     private final FileService fileService;
@@ -48,7 +47,6 @@ public class PostService {
     private final TagRepository tagRepository;
     private final PostTagRepository postTagRepository;
     private final FollowRepository followRepository;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Value("${app.dataupload.uploadDir}")
     String uploadFolder;

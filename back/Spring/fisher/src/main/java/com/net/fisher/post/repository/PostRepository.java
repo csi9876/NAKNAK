@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
@@ -67,4 +68,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @EntityGraph(attributePaths = {"postTagList"})
     @Query(value = "select p from posts p")
     List<Post> findAllPost();
+
+    @EntityGraph(attributePaths = {"postTagList"})
+    @Query(value = "select p from posts p")
+    Stream<Post> streamAll();
 }
