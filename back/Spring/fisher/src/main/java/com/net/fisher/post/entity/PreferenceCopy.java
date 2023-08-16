@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "preferences")
+@Entity(name = "preferences_copy")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @EntityListeners(AuditingEntityListener.class)
 @ToString
-public class Preference {
+public class PreferenceCopy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

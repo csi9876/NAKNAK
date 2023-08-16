@@ -15,11 +15,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Stream;
 
 @Service
@@ -40,16 +39,14 @@ public class SchedulerService {
     public void updatePreference() {
         Stream<Post> postStream = postRepository.streamAll();
         Set<Preference> preferenceSet = new HashSet<>();
-        long id = 1;
+        preferenceRepository.truncatePreference();
         postStream.forEach(post -> {
             for (PostTag postTag : post.getPostTagList()) {
                 preferenceSet.add(Preference.builder()
-                        .preferenceId(id)
                         .memberId(post.getMember().getMemberId())
                         .tagId(postTag.getPostTagId())
                         .rating(1.0)
                         .build());
-
                 if (preferenceSet.size() == TRANSACTION_CHUNK_LIMIT) {
                     preferenceRepository.saveAll(preferenceSet);
                     preferenceSet.clear();
@@ -61,7 +58,7 @@ public class SchedulerService {
     }
 
 
-    @Scheduled(fixedDelay = 300000)
+    /*@Scheduled(fixedDelay = 300000)
     public void makeCSV() throws IOException {
 
         File uploadDir = new File(uploadPath + File.separator + uploadFolder);
@@ -91,6 +88,5 @@ public class SchedulerService {
         bw.write(sb.toString());
         bw.flush();
         bw.close();
-
-    }
+    }*/
 }

@@ -17,9 +17,13 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.GenericDataModel;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
+import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLBooleanPrefJDBCDataModel;
+import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
+import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +39,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -47,11 +52,16 @@ public class PostService {
     private final TagRepository tagRepository;
     private final PostTagRepository postTagRepository;
     private final FollowRepository followRepository;
+    private final PreferenceRepository preferenceRepository;
+    private final PreferenceCopyRepository preferenceCopyRepository;
+
+    private final int TRANSACTION_CHUNK_LIMIT = 10000;
 
     @Value("${app.dataupload.uploadDir}")
     String uploadFolder;
     @Value("${app.dataupload.uploadPath}")
     String uploadPath;
+
 
     @Transactional
     public void uploadPost(long tokenId, Post post, List<Tag> tagList, MultipartHttpServletRequest httpServletRequest) {
@@ -325,7 +335,24 @@ public class PostService {
 
 
         // Mahout 을 이용한 연관 태그 추천
-        try {
+        Preference preference = preferenceRepository.findById(1l).orElse(null);
+        PreferenceCopy preferenceCopy = preferenceCopyRepository.findById(1l).orElse(null);
+
+        if (preference != null && preferenceCopy != null) {
+            if (preferenceCopy.getRegisteredAt().isBefore(preference.getRegisteredAt())) {
+                copyPreference();
+            }
+        } else if (preference != null && preferenceCopy == null) {
+            copyPreference();
+        }
+
+        Stream
+        DataModel dm = null;
+
+
+
+
+        /*try {
             String filePath = uploadPath + File.separator + uploadFolder + File.separator + "data.csv";
             String copyFilePath = uploadPath + File.separator + uploadFolder + File.separator + "data_.csv";
             File file = new File(filePath); // File객체 생성
@@ -358,24 +385,16 @@ public class PostService {
             throw new BusinessLogicException(ExceptionCode.FILE_NOT_FOUND);
         } catch (TasteException e) {
             throw new BusinessLogicException(ExceptionCode.RECOMMEND_ERROR);
-        }
+        }*/
 
-
-        // 모든 이용자가 작성한 태그 중 인기 많은
-//        myTagInfo.addAll(postRepository.countTag(PageRequest.of(0, 3)));
-
-//        System.out.println("############# taginfo");
-//        System.out.println(myTagInfo);
 
         // 태그가 없는 경우는
         Page<Post> postPageTag = null;
         if (!myTagInfo.isEmpty()) {
             postPageTag = postRepository.findPostFromMyTag(slicePageable, followingMemberList, new HashSet<>(myTagInfo), time);
         } else {
-            System.out.println("tag 가 없네용");
+//            System.out.println("tag 가 없네용");
         }
-//        System.out.println("######## 태그 기반 게시글");
-//        System.out.println(postPageTag.getContent());
 
         // 합치기
         List<Post> postFollowing = postPageFollowing.getContent();
@@ -389,6 +408,25 @@ public class PostService {
                 postPageFollowing.getTotalElements() + postPageTag.getTotalElements());
 
         return postPage;
+    }
+
+    private void copyPreference() {
+        Stream<Preference> preferenceStream = preferenceRepository.streamAll();
+        Set<PreferenceCopy> preferenceCopySet = new HashSet<>();
+        preferenceCopyRepository.truncatePreferenceCopy();
+        preferenceStream.forEach(p -> {
+            preferenceCopySet.add(PreferenceCopy.builder()
+                    .memberId(p.getMemberId())
+                    .tagId(p.getTagId())
+                    .rating(1.0)
+                    .build());
+
+            if (preferenceCopySet.size() == TRANSACTION_CHUNK_LIMIT){
+                preferenceCopyRepository.saveAll(preferenceCopySet);
+                preferenceCopySet.clear();
+            }
+        });
+        preferenceCopyRepository.saveAll(preferenceCopySet);
     }
 
     public List<Post> sorting(List<Post> post1, List<Post> post2) {
