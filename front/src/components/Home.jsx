@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "slick-carousel/slick/slick.css";
@@ -7,12 +7,13 @@ import "./Home.css";
 import Slider from "react-slick";
 import { useRecoilState } from "recoil";
 import { loginuser, newbie_recoil, sleeping_recoil } from "../utils/atoms";
+import { tmi } from "../utils/data/tmi";
 
 function Home({ newbieVersion }) {
   const [userData] = useRecoilState(loginuser);
   const [newbie, setNewbie] = useRecoilState(newbie_recoil);
   const [sleep, setSleep] = useRecoilState(sleeping_recoil);
-
+  const [tmiData, settmiData] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +23,15 @@ function Home({ newbieVersion }) {
 
     setNewbie(newbieVersion);
   }, [newbieVersion]);
+
+  useEffect(() => {
+    if (!tmiData) {
+      const random_index = Math.floor(Math.random() * tmi.length);
+      const random_tmi = tmi[random_index];
+      settmiData(random_tmi);
+    }
+    return;
+  }, []);
 
   const cameraClick = () => {
     navigate("/Camera");
@@ -35,6 +45,20 @@ function Home({ newbieVersion }) {
     slidesToScroll: 1, // 스크롤할 슬라이드 수
     rows: 2,
     slidesPerRow: 3,
+
+    // swipe: true,
+    prevArrow: <></>, // 이전 화살표를 빈 컴포넌트로 지정
+    nextArrow: <></>, // 다음 화살표를 빈 컴포넌트로 지정
+    swipe: !newbieVersion,
+  };
+  const settingss = {
+    dots: true, // 페이지 번호를 나타냄
+    infinite: true, // 무한 루프
+    speed: 300, // 애니메이션 속도 (밀리초 단위)
+    slidesToShow: 1, // 한 번에 보여질 슬라이드 수
+    slidesToScroll: 1, // 스크롤할 슬라이드 수
+    rows: 1,
+    slidesPerRow: 1,
 
     // swipe: true,
     prevArrow: <></>, // 이전 화살표를 빈 컴포넌트로 지정
@@ -61,7 +85,19 @@ function Home({ newbieVersion }) {
       </div>
       <div className="home-board">
         {sleep ? (
-          <div>"냑냑이를 깨워주세요"</div>
+          <Slider {...settingss} className="home-carousel tmidata">
+            <div
+              className={`home-slide ${newbieVersion ? "non-clickable" : ""}`}
+            >
+              {tmiData && tmiData.title}
+            </div>
+            <div
+              className={`home-slide ${newbieVersion ? "non-clickable" : ""}`}
+            >
+              {tmiData && tmiData.content}
+            </div>
+            {/* slide end */}
+          </Slider>
         ) : (
           <Slider {...settings} className="home-carousel">
             {/* slide start */}
@@ -179,6 +215,16 @@ function Home({ newbieVersion }) {
               <Link to="/Achievements" className="nav-link">
                 <img src="/assets/homeicons/awards.png" alt="icon" />
                 <h6>업적</h6>
+              </Link>
+            </div>
+            {/* slide end */}
+            {/* slide start */}
+            <div
+              className={`home-slide ${newbieVersion ? "non-clickable" : ""}`}
+            >
+              <Link to="/Checkbox" className="nav-link">
+                <img src="/assets/homeicons/checklist.png" alt="icon" />
+                <h6>체크리스트</h6>
               </Link>
             </div>
             {/* slide end */}

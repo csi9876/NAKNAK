@@ -13,7 +13,7 @@
 }
 .search {
   position: fixed;
-  top: 28rem;
+  top: 27rem;
   left: 1.5rem;
 }
 
@@ -54,14 +54,13 @@
 }
 
 .search-btn {
-  position: fixed;
-  right: 5rem;
-  top: 28rem;
+  position: absolute;
+  right: 2rem;
+  top: 27rem;
   width: 3rem;
   height: 2rem;
   text-align: center;
   color: #000000;
   border-radius: 5px;
-  margin-left: 1rem;
   background: #ffd13c;
 }

@@ -81,3 +81,15 @@
   bottom: 8.5rem;
   left: 12.5rem;
 }
+
+.sleep-naknak {
+  margin: auto;
+  font-size: 2rem;
+  color: black;
+}
+
+.tmidata {
+  font-family: "Galmuri9", sans-serif;
+  font-weight: bold;
+  font-size: 1.4rem;
+}

@@ -156,14 +156,10 @@ const Camera = () => {
         },
       });
       console.log(response.data);
-      await new Promise((resolve) => {
-        setUploadfish(response.data);
-        resolve(); // setUploadfish가 완료될 때까지 기다림
-      });
+      setUploadfish(response.data);
       console.log(uploadfish);
       setrulerbox({ bounding: [1, 1, 1, 1] });
       setfishbox(0);
-
       if (fishingMode !== "selectMode") {
         setGetFish(getFish + 1);
         console.log(getFish);
@@ -231,6 +227,7 @@ const Camera = () => {
   const stopDetection = () => {
     setDetecting(false);
     setWebcamActive(false);
+    // setfishbox(0);
   };
   useEffect(() => {
     startDetection(); // 페이지에 처음 접근할 때 감지 시작
@@ -399,10 +396,15 @@ const Camera = () => {
                     setrulerbox(boxes[1]);
                     setfishbox(boxes[0]);
                   } else if (boxes.length === 1) {
+                    return;
                     setfishbox(boxes[0]);
                     setrulerbox({ bounding: [1, 1, 1, 1] });
                   }
-
+                  setTimeout(function () {
+                    startDetection();
+                    setWebcamActive(true);
+                    setLastCapturedImage(null);
+                  }, 300000); // 300000 밀리초 (5분) 후에 실행
                   // 라벨이 라이터가 아니면 피쉬 박스
                   console.log(fishbox);
                   console.log(rulerbox);
@@ -444,10 +446,21 @@ const Camera = () => {
           </button>
         </div>
       ) : ( */}
-      <div className="btn-container">
+      <div className="camera-btn-container">
         {webcamActive ? (
-          <button className="camerabutton" onClick={() => stopDetection()}>
-            Stop Detection
+          <button
+            className="camerabutton"
+            onClick={() => stopDetection()}
+            style={{
+              backgroundColor: "#ffe48e",
+              color: "black",
+              border: "none",
+              fontWeight: "bold",
+              fontSize: "1.2rem",
+              margin: "0.2rem",
+            }}
+          >
+            계측 종료
           </button>
         ) : (
           <button
@@ -457,15 +470,53 @@ const Camera = () => {
               setWebcamActive(true) &
               setLastCapturedImage(null)
             }
+            style={{
+              backgroundColor: "#ffe48e",
+              color: "black",
+              border: "none",
+              fontWeight: "bold",
+              fontSize: "1.2rem",
+              margin: "0.2rem",
+            }}
           >
-            Start Detection
+            계측 시작
           </button>
         )}
       </div>
       {fishbox !== 0 && (
-        <div>
-          <button onClick={() => dataUpload()}>
-            {fishbox.label} 포획 성공!!!. 등록하시겠습니까?
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            fontWeight: "bold",
+          }}
+        >
+          <h2
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            <span
+              style={{ color: "red", fontWeight: "bold", fontSize: "2rem" }}
+            >
+              {fishbox.label}
+            </span>{" "}
+            포획 성공!!
+          </h2>
+
+          <button
+            className="camerabutton"
+            style={{
+              backgroundColor: "#ffe48e",
+              color: "black",
+              border: "none",
+              fontWeight: "bold",
+              fontSize: "1.2rem",
+              margin: "0.2rem",
+            }}
+            onClick={() => dataUpload()}
+          >
+            <span>등록하기</span>
           </button>
         </div>
       )}
