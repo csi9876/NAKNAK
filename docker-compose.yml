@@ -27,7 +27,7 @@ services:
     container_name: nginx
     environment:
       - WDS_SOCKET_PORT=0
-    #dns_search: s09p12e105_spring-redis
+    ##dns_search: s09p12e105_spring-redis
 
   react:
     build:
