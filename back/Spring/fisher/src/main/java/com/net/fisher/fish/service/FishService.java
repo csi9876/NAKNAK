@@ -293,13 +293,14 @@ public class FishService {
                     .maxSize(inventory.getSize())
                     .number(1)
                     .build();
-        } else {
-            findBooks.updateDate();
-            findBooks.updateMaxSize(inventory.getSize());
-            findBooks.updateNumber();
-        }
 
-        booksRepository.save(findBooks);
+            booksRepository.save(findBooks);
+        } else {
+            booksRepository.updateBooksFromValues(inventory.getSize(),LocalDateTime.now(),findBooks);
+            /*findBooks.updateDate();
+            findBooks.updateMaxSize(inventory.getSize());
+            findBooks.updateNumber(); //*/
+        }
     }
 
     public List<FishBowls> getFishBowlsListFromMemberId(long memberId) {
