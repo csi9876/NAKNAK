@@ -395,7 +395,7 @@ const Camera = () => {
                     setrulerbox(boxes[1]);
                     setfishbox(boxes[0]);
                   } else if (boxes.length === 1) {
-
+                    // return;
                     setfishbox(boxes[0]);
                     setrulerbox({ bounding: [1, 1, 1, 1] });
                   }
@@ -447,8 +447,19 @@ const Camera = () => {
       ) : ( */}
       <div className="camera-btn-container">
         {webcamActive ? (
-          <button className="camerabutton" onClick={() => stopDetection()}>
-            Stop Detection
+          <button
+            className="camerabutton"
+            onClick={() => stopDetection()}
+            style={{
+              backgroundColor: "#ffe48e",
+              color: "black",
+              border: "none",
+              fontWeight: "bold",
+              fontSize: "1.2rem",
+              margin: "0.2rem",
+            }}
+          >
+            계측 종료
           </button>
         ) : (
           <button
@@ -458,15 +469,53 @@ const Camera = () => {
               setWebcamActive(true) &
               setLastCapturedImage(null)
             }
+            style={{
+              backgroundColor: "#ffe48e",
+              color: "black",
+              border: "none",
+              fontWeight: "bold",
+              fontSize: "1.2rem",
+              margin: "0.2rem",
+            }}
           >
-            Start Detection
+            계측 시작
           </button>
         )}
       </div>
       {fishbox !== 0 && (
-        <div>
-          <button onClick={() => dataUpload()}>
-            {fishbox.label} 포획 성공!!!. 등록하시겠습니까?
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            fontWeight: "bold",
+          }}
+        >
+          <h2
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            <span
+              style={{ color: "red", fontWeight: "bold", fontSize: "2rem" }}
+            >
+              {fishbox.label}
+            </span>{" "}
+            포획 성공!!
+          </h2>
+
+          <button
+            className="camerabutton"
+            style={{
+              backgroundColor: "#ffe48e",
+              color: "black",
+              border: "none",
+              fontWeight: "bold",
+              fontSize: "1.2rem",
+              margin: "0.2rem",
+            }}
+            onClick={() => dataUpload()}
+          >
+            <span>등록하기</span>
           </button>
         </div>
       )}
