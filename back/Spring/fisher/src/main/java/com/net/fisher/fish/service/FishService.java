@@ -297,6 +297,7 @@ public class FishService {
             booksRepository.save(findBooks);
         } else {
             booksRepository.updateBooksFromValues(inventory.getSize(),LocalDateTime.now(),findBooks);
+            System.out.println(booksRepository.findById(findBooks.getBooksId()).get().toString());
             /*findBooks.updateDate();
             findBooks.updateMaxSize(inventory.getSize());
             findBooks.updateNumber(); //*/

@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class Books { // 누구의 도감에 무슨 물고기가 등록되었는지 관리하는 Junction Table
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
