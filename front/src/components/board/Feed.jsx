@@ -70,8 +70,8 @@ const Feed = ({
       const response = await authorizedRequest({
         method: "post",
         url: !feedLikeState
-          ? `/api/posts/likes?post=${feedInfo.postId}`
-          : `/api/posts/unlikes?post=${feedInfo.postId}`,
+          ? `/api1/api/posts/likes?post=${feedInfo.postId}`
+          : `/api1/api/posts/unlikes?post=${feedInfo.postId}`,
       });
       console.log(feedLikeState, response);
       setLoading(false);

@@ -23,7 +23,7 @@ function Follower(props) {
   const getFllowing = async () => {
     try {
       const response = await axios.get(
-        `/api/members/following/${props.user}`
+        `/api1/api/members/following/${props.user}`
       );
       setFollowerData(response.data);
       const followingList = response.data.data.map((item) => item.memberId);
@@ -49,7 +49,7 @@ function Follower(props) {
     try {
       const response = await authorizedRequest({
         method: "post",
-        url: "/api/follow/register",
+        url: "/api1/api/follow/register",
         params: param,
       });
 
@@ -66,7 +66,7 @@ function Follower(props) {
     try {
       const response = await authorizedRequest({
         method: "post",
-        url: "/api/follow/cancel",
+        url: "/api1/api/follow/cancel",
         params: param,
       });
       getFllowing();

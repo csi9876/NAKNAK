@@ -34,13 +34,13 @@ function FollowerModal(props) {
     // const config = { params: param, headers: header };
     try {
       // const response = await axios.post(
-      //   "/api/follow/register",
+      //   "/api1/api/follow/register",
       //   null,
       //   config
       // );
       const response = await authorizedRequest({
         method: "post",
-        url: "/api/follow/register",
+        url: "/api1/api/follow/register",
         params: param,
       });
     } catch (error) {
@@ -56,13 +56,13 @@ function FollowerModal(props) {
     // const config = { params: param, headers: header };
     try {
       // const response = await axios.post(
-      //   "/api/follow/cancel",
+      //   "/api1/api/follow/cancel",
       //   null,
       //   config
       // );
       const response = await authorizedRequest({
         method: "post",
-        url: "/api/follow/cancel",
+        url: "/api1/api/follow/cancel",
         params: param,
       });
     } catch (error) {

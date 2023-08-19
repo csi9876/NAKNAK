@@ -51,7 +51,7 @@ const Inventory = () => {
     try {
       const response = await authorizedRequest({
         method: "get",
-        url: "/api/fishes/fishbowl/view",
+        url: "/api1/api/fishes/fishbowl/view",
       });
       setFishBowlData(response.data);
       console.log(response.data);

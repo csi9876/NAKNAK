@@ -96,7 +96,7 @@ const MapModal = () => {
     try {
       const res = await authorizedRequest({
         method: "post",
-        url: "/api/fishingholes/favorites/register",
+        url: "/api1/api/fishingholes/favorites/register",
         data: { fishingHoleId: weatherInfo.pk },
       });
       setLike(favoritePoint.length);
@@ -119,7 +119,7 @@ const MapModal = () => {
     try {
       await authorizedRequest({
         method: "post",
-        url: "/api/fishingholes/favorites/cancel",
+        url: "/api1/api/fishingholes/favorites/cancel",
         data: { fishingHoleId: weatherInfo.pk },
       });
       const new_data = favoritePoint.filter(

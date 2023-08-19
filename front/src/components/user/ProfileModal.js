@@ -17,7 +17,7 @@ function ProfileModal(props) {
     try {
       const response = await authorizedRequest({
         method: "post",
-        url: "/api/members/update",
+        url: "/api1/api/members/update",
         // data:
       });
     } catch (error) {

@@ -69,7 +69,7 @@ function Checkbox() {
     try {
       await authorizedRequest({
         method: "post",
-        url: "/api/members/status/newbie",
+        url: "/api1/api/members/status/newbie",
         data: { isNewbie: status },
       });
       // 뉴비 상태 변경된 값 리코일도 변경해주기

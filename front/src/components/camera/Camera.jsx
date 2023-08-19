@@ -144,7 +144,7 @@ const Camera = () => {
     try {
       const response = await authorizedRequest({
         method: "post",
-        url: "/api/fishes/catch",
+        url: "/api1/api/fishes/catch",
         data: {
           label: fishbox.label,
           size:

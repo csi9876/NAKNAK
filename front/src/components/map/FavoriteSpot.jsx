@@ -22,7 +22,7 @@ function FavoriteSpot({
     try {
       await authorizedRequest({
         method: "post",
-        url: "/api/fishingholes/favorites/cancel",
+        url: "/api1/api/fishingholes/favorites/cancel",
         data: { fishingHoleId: fishingHoleId },
       });
       const new_data = favoritePoint.filter(

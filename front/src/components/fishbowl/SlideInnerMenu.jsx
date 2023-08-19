@@ -27,7 +27,7 @@ const SlideInnerMenu = ({
       try {
         const response = await authorizedRequest({
           method: "post",
-          url: "/api/fishes/intoinven",
+          url: "/api1/api/fishes/intoinven",
           data: { targetId: id },
         });
         console.log(response);
@@ -39,7 +39,7 @@ const SlideInnerMenu = ({
       try {
         const response = await authorizedRequest({
           method: "post",
-          url: "/api/fishes/intobowl",
+          url: "/api1/api/fishes/intobowl",
           data: { targetId: id },
         });
         console.log(response);

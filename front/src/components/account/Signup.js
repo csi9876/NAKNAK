@@ -161,8 +161,8 @@ function Signup(props) {
       }
       const member = "/api/members/register";
 
-      // const response = await axios.post("/api/members/register", formData);
-      const response = await axios.post("" + member, formData, {
+      // const response = await axios.post("/api1/api/members/register", formData);
+      const response = await axios.post("/api1" + member, formData, {
         headers: header,
       });
 

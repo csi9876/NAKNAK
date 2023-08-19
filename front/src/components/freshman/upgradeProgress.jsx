@@ -4,7 +4,7 @@ async function upgradeProgress(status) {
   try {
     const response = await authorizedRequest({
       method: "post",
-      url: "/api/members/status/progress",
+      url: "/api1/api/members/status/progress",
       data: { tutorialProgress: status },
     });
     return response;
