@@ -17,7 +17,7 @@ function Mypost(props) {
     try {
       const response = await authorizedRequest({
         method: "get",
-        url: `/api1/api/posts/${props.ver}`,
+        url: `/api/posts/${props.ver}`,
         params: param,
       });
       setLoading(false); // 데이터 로딩 완료

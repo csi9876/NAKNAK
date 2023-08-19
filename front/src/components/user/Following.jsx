@@ -20,7 +20,7 @@ function Following(props) {
   const getFllowing = async () => {
     try {
       const response = await axios.get(
-        `/api1/api/members/follow/${props.user}`
+        `/api/members/follow/${props.user}`
       );
       setFollowingData(response.data);
       setLoading(false); // 데이터 로딩 완료

@@ -29,7 +29,7 @@ const Dogam = (props) => {
         setLoading(true);
         const response = await authorizedRequest({
           method: "get",
-          url: `/api1/api/books/${user.memberId}`,
+          url: `/api/books/${user.memberId}`,
         });
 
         console.log("response success", response.data);

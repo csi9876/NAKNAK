@@ -48,7 +48,7 @@ function Profile(props) {
     try {
       const response = await authorizedRequest({
         method: "get",
-        url: `/api1/api/members/${temp}`,
+        url: `/api/members/${temp}`,
       });
       setProfileData(response.data);
       // console.log(response.data);

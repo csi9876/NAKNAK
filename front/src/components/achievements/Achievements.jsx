@@ -21,8 +21,8 @@ function Achievements(props) {
     try {
       const response = await authorizedRequest({
         method: "get",
-        url: `/api1/api/challenge/${userData.memberId}`,
-        // url: `/api1/api/challenge/1`,
+        url: `/api/challenge/${userData.memberId}`,
+        // url: `/api/challenge/1`,
       });
       setAllquest(response.data.checkResponse);
       setAcquiredQuest(response.data.list);

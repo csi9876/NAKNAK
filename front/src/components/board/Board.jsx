@@ -48,7 +48,7 @@ const Board = () => {
 
         const response = await authorizedRequest({
           method: "get",
-          url: `/api1/api/tags`,
+          url: `/api/tags`,
         });
 
         console.log("tag load success", response.data);
@@ -69,7 +69,7 @@ const Board = () => {
       try {
         const response = await authorizedRequest({
           method: "get",
-          url: `/api1/api/members/follow/${userInfo.memberId}`,
+          url: `/api/members/follow/${userInfo.memberId}`,
         });
         setFollowList(response.data);
       } catch (error) {
@@ -87,7 +87,7 @@ const Board = () => {
       try {
         const response = await authorizedRequest({
           method: "get",
-          url: `/api1/api/posts/my-like?page=1&size=&memberId=${userInfo.memberId}`,
+          url: `/api/posts/my-like?page=1&size=&memberId=${userInfo.memberId}`,
         });
         console.log("success get likedFeedList", response.data);
 
@@ -110,11 +110,11 @@ const Board = () => {
     try {
       setLoading(true);
 
-      const responseCurrentTime = await axios.get(`/api1/api/time/server`);
+      const responseCurrentTime = await axios.get(`/api/time/server`);
 
       const response = await authorizedRequest({
         method: "get",
-        url: `/api1/api/posts?page=${page}&size=${showFeedCount}&time=${responseCurrentTime.data.serverTime}`,
+        url: `/api/posts?page=${page}&size=${showFeedCount}&time=${responseCurrentTime.data.serverTime}`,
       });
       if (response.data.data.length === 0) {
         return;
@@ -147,7 +147,7 @@ const Board = () => {
     try {
       const response = await authorizedRequest({
         method: "post",
-        url: `/api1/api/follow/${
+        url: `/api/follow/${
           state ? "cancel" : "register"
         }?follow=${postMemberId}`,
       });
@@ -162,7 +162,7 @@ const Board = () => {
     try {
       const response = await authorizedRequest({
         method: "get",
-        url: `/api1/api/members/${postMemberId}`,
+        url: `/api/members/${postMemberId}`,
       });
       console.log(
         "postMemberId" + "success get flowing member status",

@@ -127,7 +127,7 @@ function CameraApp() {
   const uploadImage = async (formData) => {
     try {
       // 이미지 데이터를 서버로 전송
-      const response = await axios.post("/api1/api/fishes/upload", formData, {
+      const response = await axios.post("/api/fishes/upload", formData, {
         headers: header,
       });
 

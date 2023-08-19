@@ -11,7 +11,7 @@ function Profileinventory(props) {
     try {
       const response = await authorizedRequest({
         method: "get",
-        url: `/api1/api/fishes/inventory/info/${props.id}`,
+        url: `/api/fishes/inventory/info/${props.id}`,
       });
       setinvenData(response.data);
       console.log(invenData);

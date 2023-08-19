@@ -106,7 +106,7 @@ function Login(props) {
     try {
       const response = await authorizedRequest({
         method: "get",
-        url: "/api1/api/fishingholes/favorites",
+        url: "/api/fishingholes/favorites",
       });
       setFavoritePoint(response.data);
       // console.log(response.data);
@@ -120,7 +120,7 @@ function Login(props) {
     try {
       const response = await authorizedRequest({
         method: "get",
-        url: `/api1/api/members/${memberId}`,
+        url: `/api/members/${memberId}`,
       });
       setProfileData(response.data);
 
@@ -189,7 +189,7 @@ function Login(props) {
 
     try {
       setLoading(true);
-      const response = await axios.post("/api1/api/login", loginData);
+      const response = await axios.post("/api/login", loginData);
       setUserData(response.data);
       setAccessToken(response.headers.authorization);
       localStorage.setItem("key", response.headers.authorization);
@@ -220,8 +220,8 @@ function Login(props) {
   //   try {
   //     setLoading(true);
   //     const response = await axios.get(
-  //       `/api1/oauth2/authorization/${provider}`
-  //       // "/api1/oauth2/authorization/google"
+  //       `/oauth2/authorization/${provider}`
+  //       // "/oauth2/authorization/google"
   //     );
   //     setUserData(response.data);
   //     console.log(response.headers.authorization);

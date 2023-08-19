@@ -63,7 +63,7 @@ public class MemberService {
 
     @PostConstruct
     public void initialize(){ // server on mattermost bot
-        String ipAddressStr = "ip"; //test
+        /*String ipAddressStr = "ip"; //test
         try {//test2
             InetAddress ipAddress = InetAddress.getLocalHost();
             ipAddressStr = ipAddress.getHostAddress();
@@ -95,7 +95,7 @@ public class MemberService {
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
         }else{
 
-        }
+        }*/
 
     }
 

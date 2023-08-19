@@ -112,7 +112,7 @@ function UserUpdate(props) {
 
       const response = await authorizedRequest({
         method: "post",
-        url: "/api1/api/members/update",
+        url: "/api/members/update",
         data: formData,
         headers: header,
       });

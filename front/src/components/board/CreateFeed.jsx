@@ -27,7 +27,7 @@ const CreateFeed = () => {
 
         const response = await authorizedRequest({
           method: "get",
-          url: `/api1/api/tags`,
+          url: `/api/tags`,
         });
 
         console.log("tag load success", response.data);
@@ -100,7 +100,7 @@ const CreateFeed = () => {
       const response = await authorizedRequest({
         header: { "Content-Type": "multipart/form-data" },
         method: "post",
-        url: `/api1/api/posts/upload`,
+        url: `/api/posts/upload`,
         data: formData,
       });
       console.log("feed load success", response);

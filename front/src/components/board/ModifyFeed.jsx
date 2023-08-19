@@ -31,7 +31,7 @@ const ModifyFeed = () => {
 
         const response = await authorizedRequest({
           method: "get",
-          url: `/api1/api/posts/${postId}`,
+          url: `/api/posts/${postId}`,
         });
 
         console.log("feed load success", response.data);
@@ -60,7 +60,7 @@ const ModifyFeed = () => {
 
         const response = await authorizedRequest({
           method: "get",
-          url: `/api1/api/tags`,
+          url: `/api/tags`,
         });
         console.log("tag load success", response.data);
         setTagListData(response.data);
@@ -114,7 +114,7 @@ const ModifyFeed = () => {
 
       const response = await authorizedRequest({
         method: "patch",
-        url: `/api1/api/posts/${postId}`,
+        url: `/api/posts/${postId}`,
         data: {
           postId: postId,
           content: content,
@@ -138,7 +138,7 @@ const ModifyFeed = () => {
 
       const response = await authorizedRequest({
         method: "delete",
-        url: `/api1/api/posts/${postId}`,
+        url: `/api/posts/${postId}`,
       });
       console.log("feed delete success", response.data);
 
