@@ -111,9 +111,9 @@
 ┗📂mobile
 ┗📂data
 ```
-
-front-end
-```
+<details>
+<summary>front-end</summary>
+    
 📦src
  ┣ 📂api
  ┃ ┣ 📜BadanuriAPI.js
@@ -300,9 +300,12 @@ front-end
  ┣ 📜index.jsx
  ┣ 📜reportWebVitals.js
  ┗ 📜setupProxy.js
-```
-back-end
-```
+</details>
+
+
+<details>
+<summary>back-end</summary>
+
 📦src
  ┣ 📂main
  ┃ ┣ 📂java
@@ -675,7 +678,7 @@ back-end
  ┃ ┃ ┃ ┗ 📂net
  ┃ ┃ ┃ ┃ ┗ 📂fisher
  ┃ ┃ ┃ ┃ ┃ ┗ 📜FisherApplicationTests.java
-```
+</details>
 
 
 
