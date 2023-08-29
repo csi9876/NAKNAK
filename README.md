@@ -113,7 +113,8 @@
 ```
 <details>
 <summary>front-end</summary>
-    
+
+```
 📦src
  ┣ 📂api
  ┃ ┣ 📜BadanuriAPI.js
@@ -300,12 +301,14 @@
  ┣ 📜index.jsx
  ┣ 📜reportWebVitals.js
  ┗ 📜setupProxy.js
+```
 </details>
 
 
 <details>
 <summary>back-end</summary>
-
+    
+```
 📦src
  ┣ 📂main
  ┃ ┣ 📂java
@@ -678,6 +681,7 @@
  ┃ ┃ ┃ ┗ 📂net
  ┃ ┃ ┃ ┃ ┗ 📂fisher
  ┃ ┃ ┃ ┃ ┃ ┗ 📜FisherApplicationTests.java
+```
 </details>
 
 
