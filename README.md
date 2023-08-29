@@ -37,12 +37,6 @@
 
 </aside>
 
-# 프로젝트 확인하기
-
-모바일 웹으로 접속 : [https://i9e105.p.ssafy.io](https://i9e105.p.ssafy.io/)
-
-웹 apk 설치 경로 : https://i9e105.p.ssafy.io/api1/upload/app-arm64-v8a-release.apk
-
 ## 역할 분담
 
 **Frontend**
