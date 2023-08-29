@@ -1,4 +1,4 @@
-<h1 align="center"> E105 공통프로젝트 </h1>
+<h1 align="center"> NAKNAK </h1>
 
 ## 📝 목차
 
