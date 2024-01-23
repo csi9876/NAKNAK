@@ -64,7 +64,6 @@ class _MyAppState extends State<MyApp> {
     await _checkStoragePermission();
     await _getCurrentLocation();
     // await _get('https://otakubot.store:20101/api/books/1');
-    // await _post('https://otakubot.store:20101/api/login', {'email':'csi@csi.com', 'password':'csi123'});
   }
 
   // 위치 권한 확인 함수
